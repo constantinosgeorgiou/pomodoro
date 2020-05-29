@@ -22,6 +22,7 @@ pause.onclick = () => {
     start.classList.remove("hide");
 };
 
+
 reset.onclick = () => {
     // Open modal asking if you are sure
 
