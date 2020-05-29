@@ -1,4 +1,14 @@
+.center-timer {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.timer input {
+  font-size: 3vw;
+}
+
 .hide {
-  display: none;
-  
+    display: none;
 }

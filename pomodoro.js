@@ -1,71 +1,64 @@
-// Select buttons:
-const start = document.getElementById("start");
-const pause = document.getElementById("pause");
-const reset = document.getElementById("reset");
-const settings = document.getElementById("settings");
+let timerIntervalID;
+let timer = 6000; // in milliseconds
+let remainingTime = timer; // in milliseconds
 
-let timer;
+function startTimer() {
+    timerIntervalID = setInterval(countDown, 1000);
+}
 
-// Start timer:
-start.onclick = () => {
-    timer = setInterval(startCountDown, 1000); // Count down every 1000 milliseconds / 1 second
+function pauseTimer() {
+    clearInterval(timerIntervalID);
+}
 
-    start.classList.add("hide");
-    pause.classList.remove("hide");
-};
+function resetTimer() {
+    clearInterval(timerIntervalID);
+    remainingTime = timer;
+    updateTimer(calculateRemainingTime());
+}
 
-// Pause timer:
-pause.onclick = () => {
-    const countDown = clearInterval(timer);
+function countDown() {
+    // Calculate remaining minutes and seconds:
+    let minutes = Math.floor(remainingTime / 60000);
+    let seconds = (remainingTime % 60000) / 1000;
 
-    pause.classList.add("hide");
-    start.classList.remove("hide");
-};
+    console.log(minutes + ":" + seconds);
 
-
-reset.onclick = () => {
-    // Open modal asking if you are sure
-
-    // console.log(timer.minutes + ":" + timer.seconds);
-    // Select elements in DOM
-    const minutesElement = document.getElementById("minutes");
-    const secondsElement = document.getElementById("seconds");
-
-    // Initialize elements in DOM with initial time
-    minutesElement.value = parseInt(timer.minutes) || 0;
-    secondsElement.value = parseInt(timer.seconds) || 0;
-};
-settings.onclick = () => {
-    // Modal for settings
-};
-
-// Counts down:
-function startCountDown() {
-    // Select elements in DOM
-    const minutesElement = document.getElementById("minutes");
-    const secondsElement = document.getElementById("seconds");
-
-    // Parse the element values into integers
-    let minutes = parseInt(minutesElement.value) || 0;
-    let seconds = parseInt(secondsElement.value) || 0;
-
-    // Calculate remaining time
     if (seconds === 0 && minutes === 0) {
-        const stopCountDown = clearInterval(timer);
+        clearInterval(timerIntervalID);
 
-        pause.classList.add("hide");
-        start.classList.remove("hide");
+        alert("Done!");
     } else if (seconds === 0 && minutes !== 0) {
         minutes--;
-        seconds = 60;
+        seconds = 59;
+        console.log("change: " + minutes + ":" + seconds);
     } else {
         seconds--;
     }
 
-    console.log(timer.minutes + ":" + timer.seconds);
+    // Update remaining time
+    remainingTime = minutes + seconds * 1000;
+
+    console.log("remaining: " + remainingTime + " " + minutes + ":" + seconds);
+
+    // Select elements in DOM
+    const minutesElement = document.getElementById("minutes");
+    const secondsElement = document.getElementById("seconds");
 
     // Update elements in DOM with remaining time
     minutesElement.value = minutes;
     secondsElement.value = seconds;
     document.title = "Pomodoro: " + minutes + ":" + seconds;
+}
+
+function updateButtons() {
+    const startElement = document.getElementById("start");
+    const pauseElement = document.getElementById("pause");
+
+    if (pauseElement.classList.contains("hide")) {
+        pauseElement.classList.remove("hide");
+        startElement.classList.add("hide");
+    } else {
+        startElement.classList.remove("hide");
+        pauseElement.classList.add("hide");
+    }
 }

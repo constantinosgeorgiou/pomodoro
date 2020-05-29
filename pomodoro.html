@@ -4,21 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/f53dd5868d.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="pomodoro.css">
     <title>Pomodoro</title>
 </head>
 
 <body>
-    <section id='timer'>
-        <input type="text" id="minutes">
-        <span>:</span>
-        <input type="text" id="seconds">
+    <section id='timer' class="center-timer">
+        <div class="timer">
+            <input type="text" id="minutes">
+            <span>:</span>
+            <input type="text" id="seconds">
+        </div>
+
+        <button id="reset" onclick="resetTimer(); updateButtons();"><i class="fas fa-undo-alt "></i></button>
+        <button id="start" onclick="startTimer(); updateButtons();"><i class="fas fa-play "></i></button>
+        <button id="pause" onclick="pauseTimer(); updateButtons();" class="hide">
+            <i class="fas fa-pause "></i>
+        </button>
+
+        <button id="settings" onclick="openSettings();"><i class="fas fa-sliders-h "></i></button>
     </section>
 
-    <button id='reset' onclick="resetTimer();">reset</button>
-    <button id='start' onclick="startTimer();">start</button>
-    <button id='pause' onclick="pauseTimer();" class='hide'>pause</button>
-    <button id='settings' onclick="openSettings();">settings</button>
 
     <script src="pomodoro.js"></script>
 </body>
