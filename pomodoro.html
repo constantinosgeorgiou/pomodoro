@@ -11,11 +11,7 @@
 
 <body>
     <section id='timer' class="center-timer">
-        <div class="timer">
-            <input type="text" id="minutes">
-            <span>:</span>
-            <input type="text" id="seconds">
-        </div>
+        <p><span id="minutes"></span>:<span id="seconds"></span></p>
 
         <button id="reset" onclick="resetTimer(); updateButtons();"><i class="fas fa-undo-alt "></i></button>
         <button id="start" onclick="startTimer(); updateButtons();"><i class="fas fa-play "></i></button>
@@ -23,7 +19,27 @@
             <i class="fas fa-pause "></i>
         </button>
 
-        <button id="settings" onclick="openSettings();"><i class="fas fa-sliders-h "></i></button>
+        <button id="settings" onclick="openSettings();"><i class="fas fa-cog "></i></button>
+    </section>
+
+    <section>
+        <h1>settings</h1>
+        <h3>Work:</h3>
+        <label>Minutes:</label>
+        <input type="text" id="settingsWorkMinutes">
+        <span>:</span>
+        <label>Seconds:</label>
+        <input type="text" id="settingsWorkSeconds">
+
+        <h3>Relax:</h3>
+        <label>Minutes:</label>
+        <input type="text" id="settingsRelaxMinutes">
+        <span>:</span>
+        <label>Seconds:</label>
+        <input type="text" id="settingsRelaxSeconds">
+        <p></p>
+        <button id="settingsClose">Close</button>
+        <button id="settingsSave" onclick="updateTimer()"><i class="fas fa-save"></i></button>
     </section>
 
 
